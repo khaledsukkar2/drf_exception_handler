@@ -20,7 +20,7 @@ def trigger_application_error():
 ```
 add it on our package settings
 
-* we have to establish a way to check if the user provide a custom exception class and if provided switch it with our default AppilicationError (at apps/API/exception_class.py)
+* we have to establish a way to check if the user provide a custom exception schema in our package settings and if provided switch it with our default AppilicationError (at apps/API/exception_class.py)
 
 How To Create A New Django App In Our Project:
 

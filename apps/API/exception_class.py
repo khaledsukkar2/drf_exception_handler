@@ -6,3 +6,10 @@ class ApplicationError(Exception):
         self.message = message
         self.status_code = status_code
         self.extra = extra or {}
+
+
+class CustomErrorClass(Exception):
+    def __init__(self, *args: object, **kwargs) -> None:
+        super().__init__(*args)
+
+        # add for loop on kwargs
