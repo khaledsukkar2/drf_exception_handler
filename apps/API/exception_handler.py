@@ -28,7 +28,7 @@ def custom_exception_handler(exc, ctx):
                 "message": exc.message,
                 "extra": exc.extra
             }
-            return Response(data, status=400)
+            return Response(data, status=exc.status_code)
         
         return response
     

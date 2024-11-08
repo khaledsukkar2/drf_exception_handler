@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.core.exceptions import ValidationError, PermissionDenied
 
+from apps.API.exception_class import ApplicationError
 from rest_framework.request import Request
 from rest_framework import decorators, status, exceptions
 
@@ -32,7 +33,8 @@ def too_many_request(request: Request):
 
 
 def create_exception_class(attrs: dict):
-    return type("inline_api_exception", (exceptions.APIException, ), attrs)
+    return type("inline_api_exception", (exceptions.APIException,), attrs)
+
 
 def inline_exception(attrs: dict):
     Exceptionklass = create_exception_class(attrs=attrs)
@@ -41,10 +43,22 @@ def inline_exception(attrs: dict):
 
 @decorators.api_view(http_method_names=["get"])
 def inline_too_many_requests(request: Request):
-    TooManyRequest = inline_exception(dict(
-        status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-        default_code="Many Request",
-        default_detail="This resource is closed because you call it too many times"
-    ))
+    TooManyRequest = inline_exception(
+        dict(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            default_code="Many Request",
+            default_detail="This resource is closed because you call it too many times",
+        )
+    )
 
     raise TooManyRequest
+
+
+@decorators.api_view(http_method_names=["get"])
+def application_error(request: Request):
+    response = ApplicationError(
+        message="This is application error",
+        status_code=401,
+    )
+
+    raise response
