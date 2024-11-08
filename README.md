@@ -1,3 +1,27 @@
+To Do:
+1. set the exception handler to our, on rest framework settings
+2. you can use ValidationError, PermissionError and http404 freely and it will return in json
+3. you can use inlince_exception to raise your own exceptions (schema and data and status code)
+4. you can add your own exception schema like this:</br>
+```py
+class ApplicationError(Exception):
+    def __init__(self, message, extra=None, status_code=400):
+        super().__init__(message)
+
+        self.message = message
+        self.status_code = status_code
+        self.extra = extra or {}
+```
+You can add any number of attribute and whichever schema you want
+and raise it in your business logic position like this:
+```py
+def trigger_application_error():
+    raise ApplicationError(message="Something is not correct", extra={"type": "RANDOM"})
+```
+add it on our package settings
+
+* we have to establish a way to check if the user provide a custom exception class and if provided switch it with our default AppilicationError (at apps/API/exception_class.py)
+
 How To Create A New Django App In Our Project:
 
 1. first create a new folder with the name of the new app inside apps folder</br>
