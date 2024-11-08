@@ -11,4 +11,5 @@ urlpatterns = [
     path("not_found_error/", apis.not_found, name="not_found"),
     path("too_many_request/", apis.too_many_request, name="too_many_request"),
     path("inline_too_many_request/", apis.inline_too_many_requests, name="inline_too_many_request"),
+    path("application_error/", apis.application_error, name="inline_too_many_request"),
 ]
