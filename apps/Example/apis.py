@@ -5,7 +5,6 @@ from apps.API.exception_class import ApplicationError
 from rest_framework.request import Request
 from rest_framework import decorators, status, exceptions
 
-
 @decorators.api_view(http_method_names=["get"])
 def validation_error(request: Request):
     raise ValidationError("it's validation error")

@@ -12,4 +12,5 @@ class CustomErrorClass(Exception):
     def __init__(self, *args: object, **kwargs) -> None:
         super().__init__(*args)
 
-        # add for loop on kwargs
+        for key, value in kwargs:
+            self.key = value
